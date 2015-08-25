@@ -84,7 +84,7 @@
                 }
 
                 //Tipo
-                var tipo = $('input:radio[name=tipo]:checked').val();
+                var tipo = $('input:radio[name=tipo]:checked').val(); //tipo= type
                 var way_type = "";
                 var from_type = "";
 
@@ -111,35 +111,27 @@
                 } else if (tipo == 'all-node') {
 
                     from_type = '';
-
                     download_nodes(locations, newer, user, from_type);
-
-
 
                 } else if (tipo == 'hamlets') {
                     from_type = '';
                     download_hamlets(locations, newer, user, from_type);
-
-
-
                 }
                 else if (tipo == 'kanada') {
                     from_type = '';
                     download_kanada_tamel_name(locations, newer, user, from_type);
-
-
-
                 }
-
-
-
+                else if (tipo == 'kanada-tamil') {
+                    //alert('this is kanan and tamil')
+                    from_type = '<has-kv k="name:ta"/>';
+                    download_kt(locations, newer, user, from_type);
+                }
 
             } else {
                 alert("zoom in a little so we don't have to load a huge area from the API.")
             }
 
         });
-
 
 
         $('#json').click(function() {

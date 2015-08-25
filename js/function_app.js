@@ -68,7 +68,6 @@ function download_hamlets(locations, newer, user, from_type) {
     });
 };
 
-
 function download_kanada_tamel_name(locations, newer, user, from_type) {
 
     var dir = "http://127.0.0.1:8111/";
@@ -77,6 +76,31 @@ function download_kanada_tamel_name(locations, newer, user, from_type) {
         '<bbox-query s="' + locations[2] + '" n="' + locations[0] + '" w="' + locations[1] + '" e="' + locations[3] + '"/>' +
         '</query>' +
         '<print mode="meta"/>';
+
+    console.log(query);
+    $.get(dir + "import", {
+        url: 'http://overpass-api.de/api/interpreter?data=' + query
+
+
+    }).error(function() {
+        alert("Error: Enable JOSM remote!")
+    }).success(function() {
+        //e.dialog("close")
+    });
+};
+
+function download_kt(locations, newer, user, from_type) {
+
+    var dir = "http://127.0.0.1:8111/";
+
+    var query = '<bbox-query s="' + locations[2] + '" n="' + locations[0] + '" w="' + locations[1] + '" e="' + locations[3] + '"/>' +
+        '<recurse type="node-way"/>' +
+        '<query type="way">' +
+        '<item/>' +
+        newer + user + from_type +
+        '</query><union><item/>' +
+        '<recurse type="down"/>' +
+        '</union><print mode="meta"/>';
 
     console.log(query);
     $.get(dir + "import", {
@@ -141,8 +165,6 @@ function download_json_nodes(locations, newer, user) {
         maping_progress(geojson);
     });
 };
-
-
 
 function maping_progress(geojson) {
 
