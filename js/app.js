@@ -6,10 +6,8 @@
             "http://b.tile.openstreetmap.org/" + img,
             "http://c.tile.openstreetmap.org/" + img;
     }));
-
     map.addLayer(layer_osm);
-   // map.addLayer(mapbox.layer().id('ruben.us-over'));
-
+    // map.addLayer(mapbox.layer().id('ruben.us-over'));
     map.setZoomRange(3, 18);
     map.centerzoom({
         lat: 41.474,
@@ -19,12 +17,7 @@
     map.ui.zoombox.add();
     map.ui.hash.add();
     map.ui.attribution.add().content('<a href="http://www.openstreetmap.org/copyright">(c) OpenStreetMap contributors</a>');
-
-
-
     (function() {
-
-
         window.setTimeout(function() {
             $('#map').removeClass('loading');
         }, 500);
@@ -116,15 +109,14 @@
                 } else if (tipo == 'hamlets') {
                     from_type = '';
                     download_hamlets(locations, newer, user, from_type);
-                }
-                else if (tipo == 'kanada') {
+                } else if (tipo == 'kanada') {
                     from_type = '';
                     download_kanada_tamel_name(locations, newer, user, from_type);
-                }
-                else if (tipo == 'kanada-tamil') {
-                    //alert('this is kanan and tamil')
+                } else if (tipo == 'kanada-tamil') {
                     from_type = '<has-kv k="name:ta"/>';
                     download_kt(locations, newer, user, from_type);
+                } else if (tipo == 'osm-objects') {
+                    osm_objects(locations, newer, user);
                 }
 
             } else {
@@ -142,9 +134,6 @@
             var hour = date_hour.substring(11, 19).split(":");
             var newer = date[2] + "-" + date[0] + "-" + date[1] + "T" + date_hour.substring(11, 19) + "Z";
             var user = $('#imput_user').val();
-
-
-
             //Tipo
             var tipo = $('input:radio[name=tipo]:checked').val();
 
@@ -154,10 +143,10 @@
 
                 //web site
                 // $('#btn-full-with').trigger('click');
-                 $('#osm_user').empty();
+                $('#osm_user').empty();
                 $('#v1').empty();
                 $('#vx').empty();
-                
+
 
                 $('#download_file').attr("disabled", true);
 
@@ -197,7 +186,7 @@
             $('#progress_map').hide(200);
             $('#progress_map').empty();
             $('#progress_detail').hide(200);
-           // $('#progress_detail').empty();
+            // $('#progress_detail').empty();
             $('#close').hide(200);
 
         });

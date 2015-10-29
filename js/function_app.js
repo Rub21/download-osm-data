@@ -1,5 +1,4 @@
-
-var url_data='';
+var url_data = '';
 
 function download_ways(locations, newer, user, way_type) {
 
@@ -21,7 +20,7 @@ function download_ways(locations, newer, user, way_type) {
     }).error(function() {
         alert("Error: Enable JOSM remote!")
     }).success(function() {
-       // e.dialog("close")
+        // e.dialog("close")
     });
 };
 
@@ -46,6 +45,7 @@ function download_nodes(locations, newer, user, from_type) {
         //e.dialog("close")
     });
 };
+
 function download_hamlets(locations, newer, user, from_type) {
 
     var dir = "http://127.0.0.1:8111/";
@@ -114,6 +114,38 @@ function download_kt(locations, newer, user, from_type) {
     });
 };
 
+
+
+function osm_objects(locations, newer, user) {
+    var dir = "http://127.0.0.1:8111/";
+    var bbox = '<bbox-query s="' + locations[2] + '" n="' + locations[0] + '" w="' + locations[1] + '" e="' + locations[3] + '"/>';
+    var query = '<osm-script>' +
+        '<union>' +
+        '<query type="node">' +
+        newer + bbox + '</query>' +
+        '<query type="way">' +
+        newer + bbox + '</query>' +
+        '<query type="relation">' +
+        newer + bbox + '</query>' +
+        '</union>' +
+        '<union>' +
+        '<item/>' +
+        '<recurse type="down"/>' +
+        '</union>' +
+        '<print/>' +
+        '</osm-script>';
+    console.log(query);
+    $.get(dir + "import", {
+        url: 'http://overpass-api.de/api/interpreter?data=' + query
+    }).error(function() {
+        alert("Error: Enable JOSM remote!")
+    }).success(function() {
+        //e.dialog("close")
+    });
+};
+
+
+
 function download_json_nodes(locations, newer, user) {
 
     var query = '[out:json];node(newer:"' + newer + '")(user:"' + user + '")(' + locations[2] + ',' + locations[1] + ',' + locations[0] + ',' + locations[3] + ');out meta;';
@@ -157,7 +189,7 @@ function download_json_nodes(locations, newer, user) {
         });
 
         //web site
-         $('#osm_user').text($('#imput_user').val());
+        $('#osm_user').text($('#imput_user').val());
         $('#v1').text(v1);
         $('#vx').text(vx);
 
