@@ -88,7 +88,7 @@
 
                 } else if (tipo == 'buildings') {
 
-                    way_type = '<has-kv k="building" v="yes"/>';
+                    way_type = '<has-kv k="building"/>';
                     download_ways(locations, newer, user, way_type);
 
 
